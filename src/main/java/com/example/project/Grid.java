@@ -21,17 +21,33 @@ public class Grid{
 
 
     public void placeSprite(Sprite s){ //place sprite in new spot
-        grid[Sprite.CoordToIndexY(s.getY(), size)][Sprite.CoordToIndexX(s.getX(), size)] = s;
+        grid[getGrid().length - s.getY() - 1][s.getX()] = s;
     }
 
     public void placeSprite(Sprite s, String direction) { //place sprite in a new spot based on direction
-        grid[Sprite.CoordToIndexY(s.getY(), size)][Sprite.CoordToIndexX(s.getX(), size)] = new Dot(Sprite.CoordToIndexX(s.getX(), size),Sprite.CoordToIndexY(s.getY(), size));
+        grid[getGrid().length - s.getY() - 1][s.getX()] = new Dot((s.getY()),(s.getX()));
         s.move(direction);
-        grid[Sprite.CoordToIndexY(s.getY(), size)][Sprite.CoordToIndexX(s.getX(), size)] = s;
+        placeSprite(s);
     }
 
 
     public void display() { //print out the current grid to the screen 
+        for (Sprite[] row : grid) {
+            for (Sprite column : row) {
+                if (column instanceof Dot) {
+                    System.out.print("⬜");
+                } else if (column instanceof Trophy) {
+                    System.out.print("🏆");
+                } else if (column instanceof Treasure) {
+                    System.out.print("🪙");
+                } else if (column instanceof Enemy) {
+                    System.out.print("🐊");
+                } else if (column instanceof Player) {
+                    System.out.print("🦜");
+                }
+            }
+            System.out.println(); 
+        }
     }
     
     public void gameover(){ //use this method to display a loss

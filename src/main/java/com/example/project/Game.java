@@ -33,7 +33,7 @@ public class Game{
     public void play(){ //write your game logic here
         Scanner scanner = new Scanner(System.in);
         System.out.println("Choose an option: ");
-        String option = scan.nextLine();
+        String option = scanner.nextLine();
 
 
         while(true){
@@ -70,15 +70,27 @@ public class Game{
     }
 
     public static void main(String[] args) {
-        // int size = 10;
-        //  Grid grid = new Grid(size);
-        //  Player player = new Player(0, 0);
-        //  Enemy enemy = new Enemy(5, 5);
-        //  Enemy enemy2 = new Enemy(7,8);
-        //  Treasure treasure = new Treasure(2, 2);
-        //  Treasure treasure2 = new Treasure(1,7);
-        //  Trophy trophy = new Trophy(9, 9);
+        int size = 10;
+         Grid grid = new Grid(size);
+         Player player = new Player(0, 0);
+         Enemy enemy = new Enemy(5, 5);
+         Enemy enemy2 = new Enemy(7,8);
+         Treasure treasure = new Treasure(2, 2);
+         Treasure treasure2 = new Treasure(1,7);
+         Trophy trophy = new Trophy(9, 9);
 
+         grid.display();
+
+         System.out.println();
+
+         grid.placeSprite(player);
+         grid.placeSprite(enemy);
+         grid.placeSprite(enemy2);
+         grid.placeSprite(treasure);
+         grid.placeSprite(treasure2);
+         grid.placeSprite(trophy); 
+
+         grid.display();
 
         // // Row 0: [ ][ ][ ][ ][ ][ ][ ][ ][ ][W]
         // // Row 1: [ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]
