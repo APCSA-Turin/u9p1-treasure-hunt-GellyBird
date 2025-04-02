@@ -34,17 +34,15 @@ public class Player extends Sprite  {
 
     public void interact(int size, String direction, int numTreasures, Object obj) { // interact with an object in the position you are moving to 
     //numTreasures is the total treasures at the beginning of the game
-        if(obj instanceof Enemy) {
+        if (obj instanceof Enemy) {
             numLives -= 1;
         } else if (obj instanceof Treasure) {
-            if (obj instanceof Trophy) {
-                if (treasureCount >= numTreasures) {
-                    win = true;
-                } else {
-                    win = false;
-            }
-            } else {
                 treasureCount ++;
+        } else if (obj instanceof Trophy) {
+            if (treasureCount >= numTreasures) {
+                win = true;
+            } else {
+                win = false;
             }
         }
     }
@@ -52,7 +50,7 @@ public class Player extends Sprite  {
 
     public boolean isValid(int size, String direction){ //check grid boundaries
         if (direction.equals("w")) {
-            if (getY() + 1 > size - 1) {
+            if (getY() + 1 == size) {
                 return false;
             } else {
                 return true;
@@ -70,7 +68,7 @@ public class Player extends Sprite  {
                 return true;
             }
           } else {
-            if (getX() + 1 > size - 1) {
+            if (getX() + 1 == size) {
                 return false;
             } else {
                 return true;

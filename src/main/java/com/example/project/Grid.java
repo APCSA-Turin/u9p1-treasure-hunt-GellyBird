@@ -10,7 +10,7 @@ public class Grid{
         grid = new Sprite[size][size];
         for (int i = 0; i < size ; i ++) {
             for (int j = 0; j < size; j ++) {
-                grid[i][j] = new Dot(j,Sprite.IndexToCoordY(i,size));
+                grid[i][j] = new Dot(j,size - i-1);
             }
         }
     }
@@ -21,12 +21,24 @@ public class Grid{
 
 
     public void placeSprite(Sprite s){ //place sprite in new spot
-        grid[getGrid().length - s.getY() - 1][s.getX()] = s;
+        grid[getGrid().length - s.getY()-1][s.getX()] = s;
     }
 
     public void placeSprite(Sprite s, String direction) { //place sprite in a new spot based on direction
-        grid[getGrid().length - s.getY() - 1][s.getX()] = new Dot((s.getY()),(s.getX()));
-        s.move(direction);
+        grid[getGrid().length - s.getY()-1][s.getX()] = new Dot((s.getY()),(s.getX()));
+        if (s instanceof Player) {
+            s.move(direction);
+        } else {
+            if (direction.equals("w")) {
+                s.setY(s.getY() + 1);
+            } else if (direction.equals("s")) {
+                s.setY(s.getY() - 1);
+            } else if (direction.equals("a")) {
+                s.setX(s.getX() - 1);
+            } else {
+                s.setX(s.getX() + 1);
+            }
+        }
         placeSprite(s);
     }
 

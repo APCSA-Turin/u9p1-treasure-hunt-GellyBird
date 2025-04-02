@@ -32,9 +32,6 @@ public class Game{
 
     public void play(){ //write your game logic here
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Choose an option: ");
-        String option = scanner.nextLine();
-
 
         while(true){
             try {
@@ -44,54 +41,58 @@ public class Game{
             }
             clearScreen(); // Clear the screen at the beggining of the while loop
 
-     
+            if (player.getWin() == true) {
+                grid.win();
+            } else if (player.getLives() <= 0) {
+                grid.gameover();
             }
-            
+            grid.display();
+            System.out.println("Player: " + player.getCoords());
+            System.out.println("Player: " + player.getRowCol(size));
+            System.out.println("Treasure Collected: " + player.getTreasureCount());
+            System.out.println("Lives Remaining: " + player.getLives());
+            System.out.println("Enter a direction (w,a,s,d) or 'q' to exit:");
+            String option = scanner.nextLine();
+
+            if (option.equals("q")) {
+                break;
+            }
+
+            if (player.isValid(size, option)) {
+                player.interact(size,option,treasures.length,grid.getGrid()[grid.getGrid().length - player.getY() - 1][player.getX()]);
+                grid.placeSprite(player,option);
+            }
+             else {
+                System.out.println("Invalid direction!");
+            }
+
+        }
      
     }
 
     public void initialize(int size){
-         Grid grid = new Grid(size);
-         Player player = new Player(0, 0);
-         Enemy enemy = new Enemy(5, 5);
-         Enemy enemy2 = new Enemy(7,8);
-         Treasure treasure = new Treasure(2, 2);
-         Treasure treasure2 = new Treasure(1,7);
-         Trophy trophy = new Trophy(9, 9);
-        //to test, create a player, trophy, grid, treasure, and enemies. Then call placeSprite() to put them on the grid
+        grid = new Grid(size);
+        player = new Player(0, 0);
+        enemies = new Enemy[2];
+        enemies[0] = new Enemy(5, 5);
+        enemies[1] = new Enemy(7,8);
+        treasures = new Treasure[2];
+        treasures[0] = new Treasure(2, 2);
+        treasures[1] = new Treasure(1,7);
+        trophy = new Trophy(9, 9);
 
         grid.placeSprite(player);
-        grid.placeSprite(enemy);
-        grid.placeSprite(enemy2);
-        grid.placeSprite(treasure);
-        grid.placeSprite(treasure2);
-        grid.placeSprite(trophy); 
+        grid.placeSprite(enemies[0]);
+        grid.placeSprite(enemies[1]);
+        grid.placeSprite(treasures[0]);
+        grid.placeSprite(treasures[1]);
+        grid.placeSprite(trophy);
+        //to test, create a player, trophy, grid, treasure, and enemies. Then call placeSprite() to put them on the grid
    
     }
 
     public static void main(String[] args) {
-        int size = 10;
-         Grid grid = new Grid(size);
-         Player player = new Player(0, 0);
-         Enemy enemy = new Enemy(5, 5);
-         Enemy enemy2 = new Enemy(7,8);
-         Treasure treasure = new Treasure(2, 2);
-         Treasure treasure2 = new Treasure(1,7);
-         Trophy trophy = new Trophy(9, 9);
-
-         grid.display();
-
-         System.out.println();
-
-         grid.placeSprite(player);
-         grid.placeSprite(enemy);
-         grid.placeSprite(enemy2);
-         grid.placeSprite(treasure);
-         grid.placeSprite(treasure2);
-         grid.placeSprite(trophy); 
-
-         grid.display();
-
+        Game newGame = new Game(10);
         // // Row 0: [ ][ ][ ][ ][ ][ ][ ][ ][ ][W]
         // // Row 1: [ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]
         // // Row 2: [ ][T][ ][ ][ ][ ][ ][E][ ][ ]

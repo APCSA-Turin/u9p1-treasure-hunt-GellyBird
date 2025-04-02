@@ -23,7 +23,7 @@ public class Sprite {
     }
 
     public String getRowCol(int size){ //returns the row and column of the sprite -> "[row][col]"
-        return "["+CoordToIndexY(y,size)+"]" + "["+CoordToIndexX(x,size)+"]";
+        return "["+ (size - getY()) +"]" + "["+getX()+"]";
     }
     
 
@@ -33,20 +33,6 @@ public class Sprite {
 
     public void interact() { //you can leave this empty
         // Default behavior (can be overridden by subclasses)
-    }
-
-    // Methods I Added For Simplicity :)
-    public static int IndexToCoordY(int index, int size) { // Translates the Y index to a Y coordinate. I.e. [9][x] becomes (x,0)
-        int coord = (size - index - 1);
-        return coord;
-    }
-
-    public static int CoordToIndexY(int coord,int size) { // Coordinated val to index Y
-        return (size - coord - 1);
-    }
-
-    public static int CoordToIndexX(int coord,int size) { // Coordinated val to index X
-        return (0 + coord);
     }
 
 }
