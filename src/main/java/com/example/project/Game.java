@@ -10,6 +10,7 @@ public class Game{
     private int size; 
 
     public Game(int size){ //the constructor should call initialize() and play()
+        this.size = size;
         initialize(size);
         play();
     }
@@ -47,8 +48,8 @@ public class Game{
                 grid.gameover();
             }
             grid.display();
-            System.out.println("Player: " + player.getCoords());
-            System.out.println("Player: " + player.getRowCol(size));
+            System.out.println(player.getCoords());
+            System.out.println(player.getRowCol(size));
             System.out.println("Treasure Collected: " + player.getTreasureCount());
             System.out.println("Lives Remaining: " + player.getLives());
             System.out.println("Enter a direction (w,a,s,d) or 'q' to exit:");
@@ -58,8 +59,10 @@ public class Game{
                 break;
             }
 
-            if (player.isValid(size, option)) {
-                player.interact(size,option,treasures.length,grid.getGrid()[grid.getGrid().length - player.getY() - 1][player.getX()]);
+            if (player.isValid(size, option)) {      
+                player.move(option);            
+                Object obj = grid.getGrid()[size - player.getY() - 1][player.getX()];
+                player.interact(size,option,treasures.length,obj);
                 grid.placeSprite(player,option);
             }
              else {

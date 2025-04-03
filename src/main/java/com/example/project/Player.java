@@ -36,7 +36,7 @@ public class Player extends Sprite  {
     //numTreasures is the total treasures at the beginning of the game
         if (obj instanceof Enemy) {
             numLives -= 1;
-        } else if (obj instanceof Treasure) {
+        } else if (obj instanceof Treasure && !(obj instanceof Trophy)) {
                 treasureCount ++;
         } else if (obj instanceof Trophy) {
             if (treasureCount >= numTreasures) {

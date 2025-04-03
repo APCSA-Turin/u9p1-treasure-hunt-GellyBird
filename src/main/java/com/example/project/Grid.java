@@ -25,20 +25,15 @@ public class Grid{
     }
 
     public void placeSprite(Sprite s, String direction) { //place sprite in a new spot based on direction
-        grid[getGrid().length - s.getY()-1][s.getX()] = new Dot((s.getY()),(s.getX()));
-        if (s instanceof Player) {
-            s.move(direction);
+        if (direction.equals("w")) {
+                placeSprite(new Dot((s.getX()),(s.getY()-1)));
+        } else if (direction.equals("s")) {
+                placeSprite(new Dot((s.getX()),(s.getY()+1)));
+        } else if (direction.equals("a")) {
+                placeSprite(new Dot((s.getX()+1),(s.getY())));
         } else {
-            if (direction.equals("w")) {
-                s.setY(s.getY() + 1);
-            } else if (direction.equals("s")) {
-                s.setY(s.getY() - 1);
-            } else if (direction.equals("a")) {
-                s.setX(s.getX() - 1);
-            } else {
-                s.setX(s.getX() + 1);
+                placeSprite(new Dot((s.getX()-1),(s.getY())));
             }
-        }
         placeSprite(s);
     }
 
