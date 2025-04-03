@@ -31,6 +31,11 @@ public class Game{
         }
     }
 
+    /* Prints out all of the player information as well as the instructions for which direction they can move in.
+     * Then, it checks if the direction the player inputs is valid.
+     * Finally, it updates the sprite's coordinates and interacts with the object it is moving towards
+     * before updating it's position on the actual grid.
+     */
     public void play(){ //write your game logic here
         Scanner scanner = new Scanner(System.in);
 
@@ -44,8 +49,10 @@ public class Game{
 
             if (player.getWin() == true) {
                 grid.win();
+                break;
             } else if (player.getLives() <= 0) {
                 grid.gameover();
+                break;
             }
             grid.display();
             System.out.println(player.getCoords());
@@ -73,6 +80,7 @@ public class Game{
      
     }
 
+    // Initializes a grid based on the size input
     public void initialize(int size){
         grid = new Grid(size);
         player = new Player(0, 0);

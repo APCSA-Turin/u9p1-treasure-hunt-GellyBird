@@ -17,7 +17,7 @@ public class Player extends Sprite  {
     public int getLives(){return numLives;}
     public boolean getWin(){return win;}
 
-  
+  // Just updates the x or y value of the player depending on what direction they input
     //move method should override parent class, sprite
     public void move(String direction) { //move the (x,y) coordinates of the player
             if (direction.equals("w")) {
@@ -32,6 +32,9 @@ public class Player extends Sprite  {
     }
 
 
+    /* Checks what type of object obj is and then updates the player object accordingly.
+     * For example, if it was an enemy, then the player would lose a life.
+     */
     public void interact(int size, String direction, int numTreasures, Object obj) { // interact with an object in the position you are moving to 
     //numTreasures is the total treasures at the beginning of the game
         if (obj instanceof Enemy) {
@@ -47,8 +50,8 @@ public class Player extends Sprite  {
         }
     }
 
-
-    public boolean isValid(int size, String direction){ //check grid boundaries
+//check grid boundaries and if the input direction would be moving past them.
+    public boolean isValid(int size, String direction){
         if (direction.equals("w")) {
             if (getY() + 1 == size) {
                 return false;
